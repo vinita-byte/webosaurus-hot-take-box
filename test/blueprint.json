@@ -1,0 +1,8 @@
+{
+  "landingPage": "/wp-admin/admin.php?page=whtb-desk",
+  "login": true,
+  "steps": [
+    { "step": "activatePlugin", "pluginPath": "/wordpress/wp-content/plugins/webosaurus-hot-take-box/webosaurus-hot-take-box.php" },
+    { "step": "runPHP", "code": "<?php require '/seed/seed.php';" }
+  ]
+}

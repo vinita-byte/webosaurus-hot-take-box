@@ -1,0 +1,118 @@
+/* Webosaurus Hot Take Box. Themes can override any custom property on .whtb. */
+.whtb {
+	--whtb-accent: #D40016;
+	--whtb-ink: #171615;
+	--whtb-paper: #EFE5DC;
+	--whtb-bubble: #FFFFFF;
+	--whtb-mascot: clamp(88px, 18vw, 132px);
+	display: flex;
+	align-items: flex-end;
+	gap: 14px;
+	/* Block only, so the theme's content width and centring still apply. */
+	margin-block: 2.5em 1.5em;
+	padding: 18px 18px 0;
+	background: var(--whtb-paper);
+	border: 3px solid var(--whtb-ink);
+	border-radius: 18px;
+	box-shadow: 6px 6px 0 var(--whtb-ink);
+	color: var(--whtb-ink);
+	overflow: hidden;
+	position: relative;
+	box-sizing: border-box;
+}
+.whtb *,
+.whtb *::before,
+.whtb *::after { box-sizing: border-box; }
+
+.whtb__mascot {
+	flex: 0 0 var(--whtb-mascot);
+	width: var(--whtb-mascot);
+	height: var(--whtb-mascot);
+	margin-bottom: -6px;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+.whtb__mascot svg { display: block; }
+.whtb--nojs .whtb__mascot { display: none; }
+.whtb--nojs { padding-bottom: 18px; }
+
+.whtb__bubble {
+	position: relative;
+	flex: 1 1 auto;
+	min-width: 0;
+	margin: 0 0 18px;
+	padding: 14px 18px 16px;
+	background: var(--whtb-bubble);
+	border: 3px solid var(--whtb-ink);
+	border-radius: 16px;
+	align-self: center;
+}
+/* Speech bubble tail pointing at the mascot. */
+.whtb__bubble::before,
+.whtb__bubble::after {
+	content: "";
+	position: absolute;
+	left: -14px;
+	bottom: 22px;
+	border-style: solid;
+	border-width: 9px 14px 9px 0;
+	border-color: transparent var(--whtb-ink) transparent transparent;
+}
+.whtb__bubble::after {
+	left: -9px;
+	bottom: 24px;
+	border-width: 7px 11px 7px 0;
+	border-color: transparent var(--whtb-bubble) transparent transparent;
+}
+.whtb--nojs .whtb__bubble { margin-bottom: 0; }
+.whtb--nojs .whtb__bubble::before,
+.whtb--nojs .whtb__bubble::after { display: none; }
+
+.whtb__label {
+	display: inline-block;
+	margin: 0 0 8px;
+	padding: 3px 10px;
+	background: var(--whtb-accent);
+	color: #fff;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .08em;
+	line-height: 1.4;
+	text-transform: uppercase;
+	white-space: nowrap;
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: top;
+}
+.whtb__text {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	quotes: none;
+	background: none;
+	font-style: normal;
+}
+.whtb__text::before,
+.whtb__text::after { content: none; }
+.whtb__text p {
+	margin: 0;
+	font-size: clamp(17px, 2.2vw, 21px);
+	font-weight: 800;
+	line-height: 1.3;
+	letter-spacing: -.01em;
+	text-wrap: balance;
+	overflow-wrap: anywhere;
+}
+
+/* Entrance: the bubble pops in once the box scrolls into view. */
+@media (prefers-reduced-motion: no-preference) {
+	.whtb__bubble { transition: transform .45s cubic-bezier(.2, 1.4, .4, 1), opacity .3s ease; }
+	.whtb:not(.whtb--nojs):not(.whtb--in) .whtb__bubble { opacity: 0; transform: scale(.85) translateY(8px); transform-origin: left bottom; }
+}
+
+@media (max-width: 420px) {
+	.whtb { gap: 8px; padding: 14px 12px 0; }
+	.whtb__bubble { padding: 12px 14px 14px; }
+}
